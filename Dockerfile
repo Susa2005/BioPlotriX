@@ -6,13 +6,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
-    pandoc \
-    pandoc-citeproc \
     libxt6 \
     libfontconfig1 \
     tzdata \
-    && rm -rf /var/lib/apt/lists/*
-
+    pandoc \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install R packages your app needs
 RUN R -e "install.packages(c('shiny', 'ggplot2', 'rmarkdown', 'knitr'), repos='https://cloud.r-project.org')"
