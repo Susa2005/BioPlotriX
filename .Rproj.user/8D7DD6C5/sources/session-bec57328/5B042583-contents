@@ -2,13 +2,15 @@
 FROM rocker/shiny:4.4.3
 
 # Install system dependencies needed by R packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
+    libxt6 \
+    libfontconfig1 \
+    tzdata \
     pandoc \
-    pandoc-citeproc \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install R packages your app needs
 RUN R -e "install.packages(c('shiny', 'ggplot2', 'rmarkdown', 'knitr'), repos='https://cloud.r-project.org')"

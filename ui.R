@@ -37,7 +37,7 @@ fluidPage(
     "))
   ),
   
-  titlePanel(h1("🧬 BioPlotriX", align = "center")),
+  titlePanel(tags$h1("🧬BioPlotriX", align = "center")),
   
   conditionalPanel(
     condition = "output.page === 'home'",

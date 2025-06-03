@@ -60,10 +60,20 @@ function(input, output, session) {
     current_page("home")  # Return to Home page
   })
   
-  # View Tutorial
   observeEvent(input$view_tutorial, {
-    browseURL("http://www.youtube.com/@BioPlotriX")  # Replace with actual playlist link later
+    showModal(modalDialog(
+      title = "📺 Watch Tutorial on YouTube",
+      HTML("<p style='font-size:16px;'>
+           Click the link below to open the YouTube playlist in a new tab:
+           <br><br>
+           <a href='https://www.youtube.com/@BioPlotriX' target='_blank'>
+             📺 BioPlotriX YouTube Channel
+           </a>
+         </p>"),
+      easyClose = TRUE
+    ))
   })
+  
   
   
   # User Instructions
@@ -118,7 +128,7 @@ function(input, output, session) {
   output$home_ui <- renderUI({
     if (current_page() == "home") {
       fluidPage(
-        titlePanel(h1("BioPlotriX", align = "center")),
+        titlePanel(tags$h1("🧬BioPlotriX", align = "center")),
         
         h3("Select an Experiment:", align = "center"),
         br(),
