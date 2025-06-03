@@ -1,0 +1,27 @@
+{
+    "id": "092E1108",
+    "path": "~/BioGeniX/michaelis_module.R",
+    "project_path": "michaelis_module.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1744966690641.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "450,2",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1748712906,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1748712906253,
+    "read_only": false,
+    "read_only_alternatives": []
+}
