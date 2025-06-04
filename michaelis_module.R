@@ -44,7 +44,7 @@ michaelisUI <- function(id) {
         actionButton(ns("refresh"), "Refresh All"),
         
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
         
       ),
       mainPanel(

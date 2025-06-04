@@ -128,7 +128,8 @@ function(input, output, session) {
   output$home_ui <- renderUI({
     if (current_page() == "home") {
       fluidPage(
-        titlePanel(tags$h1("🧬BioPlotriX", align = "center")),
+        titlePanel(tags$h1("🧬BioPlotriX", align = "center"),
+                   ),
         
         h3("Select an Experiment:", align = "center"),
         br(),

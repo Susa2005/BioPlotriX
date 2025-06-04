@@ -1,5 +1,34 @@
 fluidPage(
   tags$head(
+    tags$head(
+      tags$title("🧬BioPlotriX"),
+      tags$script(async = NA, src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"),
+      tags$script(HTML("
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TF7EFXRTFK');
+")),
+      
+      tags$meta(name = "description", content = "BioPlotriX is an R Shiny app that automates biochemical and biotech experiments like Lowry, MTT, Monod model, etc."),
+      tags$meta(name = "keywords", content = "BioPlotriX, biotech calculator, biochemical analysis, Lowry method, MTT assay, Monod model, Shiny app"),
+      tags$meta(name = "robots", content = "index, follow"),
+      tags$meta(name = "author", content = "Susa"),
+      tags$meta(name = "google-site-verification", content = "9WFTlVXEqnPC6OMXS0iC5uFm5LnQzQJZ7jzw66qYu3U"),
+      tags$meta(name = "viewport", content = "width=device-width, initial-scale=1"),
+      tags$meta(name = "theme-color", content = "#1E88E5"),
+      
+      tags$meta(charset = "UTF-8"),
+      tags$link(rel = "canonical", href = "https://bioplotrix.onrender.com/"),
+      tags$meta(property = "og:title", content = "BioPlotriX - Automate Biotech Experiments"),
+      tags$meta(property = "og:description", content = "Analyze biotech experiments with one click using BioPlotriX."),
+      tags$meta(property = "og:url", content = "https://bioplotrix.onrender.com/"),
+      tags$meta(property = "og:type", content = "website"),
+      tags$meta(property = "og:image", content = "https://bioplotrix.onrender.com/P.png"),
+      tags$meta(property = "og:image:width", content = "1200"),
+      tags$meta(property = "og:image:height", content = "630")
+      
+    ),
     tags$style(HTML("
       body {
         background-color: #f4f8f5;
@@ -37,7 +66,8 @@ fluidPage(
     "))
   ),
   
-  titlePanel(tags$h1("🧬BioPlotriX", align = "center")),
+  titlePanel(tags$h1("🧬BioPlotriX", align = "center"),
+             ),
   
   conditionalPanel(
     condition = "output.page === 'home'",

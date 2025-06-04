@@ -21,7 +21,7 @@ monodUI <- function(id) {
         downloadButton(ns("download_plot"), "Download Plot"),
         downloadButton(ns("download_result"), "Download Result"),
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
       ),
       mainPanel(
         wellPanel(

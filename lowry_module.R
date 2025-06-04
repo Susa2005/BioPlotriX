@@ -10,7 +10,7 @@ lowryUI <- function(id) {
       sidebarPanel(
         h3("Input Data"),
         textInput(ns("od_values"), "Enter OD Values (comma-separated):"),
-        textInput(ns("concentrations"), "Enter Protein Concentrations (μg/mL, comma-separated):"),
+        textInput(ns("concentrations"), "Enter Protein Concentrations (mg/mL, comma-separated):"),
         actionButton(ns("calculate_lowry"), "Plot Calibration Curve"),
         textInput(ns("unknown_od"), "Enter OD for Unknown Sample:"),
         actionButton(ns("estimate_lowry"), "Estimate Protein Concentration"),
@@ -20,7 +20,7 @@ lowryUI <- function(id) {
         downloadButton(ns("download_plot"), "Download Plot"),
         downloadButton(ns("download_result"), "Download Results"),
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
       ),
       
       mainPanel(
@@ -29,7 +29,7 @@ lowryUI <- function(id) {
         verbatimTextOutput(ns("lowry_result"))
         ),
         wellPanel(
-          sliderInput(ns("xrange"), "X-axis Range (Concentration)", min = 0, max = 1000, value = c(0, 1000), step = 10),
+          sliderInput(ns("xrange"), "X-axis Range (Concentration)", min = 0, max = 1000, value = c(0, 1000), step = 1),
           sliderInput(ns("yrange"), "Y-axis Range (OD)", min = 0, max = 2, value = c(0, 1), step = 0.01),
           checkboxInput(ns("show_ref"), "Show Reference Lines", value = FALSE),
           checkboxInput(ns("show_eqn_r2"), "Show Equation and R² on Plot", value = TRUE),

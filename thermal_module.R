@@ -33,7 +33,7 @@ thermalUI <- function(id) {
         downloadButton(ns("download_plot"), "Download Plot"),
         downloadButton(ns("download_result"), "Download Results"),
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
       ),
       
       mainPanel(
@@ -42,8 +42,8 @@ thermalUI <- function(id) {
         verbatimTextOutput(ns("thermal_result"))
         ),
         wellPanel(
-          sliderInput(ns("xrange"), "X-axis Range (Concentration)", min = -1000, max = 1000, value = c(-100, 100), step = 1),
-          sliderInput(ns("yrange"), "Y-axis Range (OD)", min = -100, max = 100, value = c(-10, 10), step = 0.1),
+          sliderInput(ns("xrange"), "X-axis Range ", min = -1000, max = 1000, value = c(-100, 100), step = 1),
+          sliderInput(ns("yrange"), "Y-axis Range ", min = -100, max = 100, value = c(-10, 10), step = 0.1),
           checkboxInput(ns("show_ref1"), "Show Refernce Lines for TDT", value = FALSE),
           checkboxInput(ns("show_ref2"), "Show Refernce Lines for D Value", value = FALSE),
           checkboxInput(ns("show_ref3"), "Show Refernce Lines for Z Value", value = FALSE),
@@ -170,8 +170,8 @@ thermalServer <- function(input, output, session, current_page) {
     
     interpretation <- if (D_value < 5) "Good thermal resistance from the Microorganism" else "Poor resistance to temperature by the Micro Organism"
     results_text(sprintf(
-      "D-value: %.6f min\nThermal Death Time (TDT): %.6f min\nInterpretation: %s",
-      D_value, TDT, interpretation
+      "D-value: %.6f min\nThermal Death Time (TDT): %.6f min\nInterpretation: %s\nSlope:%.3f\nR Square: %.3f\nY- Intercept: %.3f\n X - Intercept: %.3f\n Equation: %s",
+      D_value, TDT, interpretation, slope, r2, intercept,x_intercept, eqn
     ))
   })
   
@@ -266,7 +266,7 @@ thermalServer <- function(input, output, session, current_page) {
     })
     
     interpretation <- if (Z_value > 5) "Micro Organism is Stable across temperatures." else "Micro Organism is Sensitive to temperature change."
-    results_text(sprintf("Z-value: %.6f °C\nInterpretation: %s", Z_value, interpretation))
+    results_text(sprintf("Z-value: %.6f °C\nInterpretation: %s\nSlope:%.3f\nR Square: %.3f\nY- Intercept: %.3f\n X - Intercept: %.3f\n Equation: %s", Z_value, interpretation, slope, r2, intercept,x_intercept, eqn))
   })
   
   output$thermal_plot <- renderPlot({

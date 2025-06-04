@@ -18,7 +18,7 @@ growthUI <- function(id) {
         downloadButton(ns("download_plot"), "Download Plot"),
         downloadButton(ns("download_result"), "Download Results"),
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
       ),
       
       mainPanel(
@@ -27,7 +27,7 @@ growthUI <- function(id) {
         verbatimTextOutput(ns("growth_result"))
         ),
         wellPanel(
-          sliderInput(ns("xrange"), "X-axis Range (Time)", min = -100, max = 100, value = c(0, 100), step = 1),
+          sliderInput(ns("xrange"), "X-axis Range (Time)", min = -100, max = 100, value = c(0, 100), step = 0.1),
           sliderInput(ns("yrange"), "Y-axis Range (OD Values)", min = -10, max = 10, value = c(-10, 10), step = 0.1),
           checkboxInput(ns("show_eqn_r2"), "Show Equation and R² on Plot", value = TRUE),
           checkboxInput(ns("show_intercepts"), "Show Intercepts", value = TRUE),
@@ -142,8 +142,8 @@ growthServer <- function(input, output, session, current_page) {
     })
     
     results_text(sprintf(
-      "Growth curve plotted!\nGrowth Rate (\\u03bc): %.4f per hour\nDoubling Time (td): %.3f hours\nY-Intercept: %.3f\nX-Intercept: %.3f\nSlope: %.3f",
-      slope, doubling_time,x_intercept, intercept, slope
+      "Growth curve plotted!\nGrowth Rate (µ): %.4f per hour\nDoubling Time (td): %.3f hours\nY-Intercept: %.3f\nX-Intercept: %.3f\nSlope: %.3f\nR Square: %.3f\n Equation: %s",
+      slope, doubling_time,x_intercept, intercept, slope, r2, eqn
     ))
   })
   

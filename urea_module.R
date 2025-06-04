@@ -10,7 +10,7 @@ ureaUI <- function(id) {
       sidebarPanel(
         h3("Input Data"),
         textInput(ns("od_values"), "Enter OD Values (comma-separated):"),
-        textInput(ns("concentrations"), "Enter Urea Concentrations (mg/dL, comma-separated):"),
+        textInput(ns("concentrations"), "Enter Urea Concentrations (mg/mL, comma-separated):"),
         actionButton(ns("calculate_urea"), "Plot Calibration Curve"),
         textInput(ns("unknown_od"), "Enter OD for Unknown Sample:"),
         actionButton(ns("estimate_urea"), "Estimate Urea Concentration"),
@@ -20,7 +20,7 @@ ureaUI <- function(id) {
         downloadButton(ns("download_plot"), "Download Plot"),
         downloadButton(ns("download_result"), "Download Results"),
         hr(),
-        actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
+        #actionButton(ns("generate_report"), "Generate Report", icon = icon("file-alt"), class = "btn btn-info btn-block")
       ),
       
       mainPanel(
@@ -29,7 +29,7 @@ ureaUI <- function(id) {
         verbatimTextOutput(ns("urea_result"))
         ),
         wellPanel(
-          sliderInput(ns("xrange"), "X-axis Range (Concentration)", min = 0, max = 1000, value = c(0, 1000), step = 10),
+          sliderInput(ns("xrange"), "X-axis Range (Concentration)", min = 0, max = 1000, value = c(0, 1000), step = 1),
           sliderInput(ns("yrange"), "Y-axis Range (OD)", min = 0, max = 2, value = c(0, 1), step = 0.01),
           checkboxInput(ns("show_ref"), "Show Reference Lines", value = FALSE),
           checkboxInput(ns("show_eqn_r2"), "Show Equation and R² on Plot", value = TRUE),
@@ -68,7 +68,7 @@ ureaServer <- function(input, output, session, current_page) {
     updateTextInput(session, "concentrations", value = "")
     updateTextInput(session, "od_values", value = "")
     updateNumericInput(session, "unknown_od", value = NA)
-    updateSliderInput(session, "xrange", value = c(0, 1000))
+    updateSliderInput(session, "xrange", value = c(0, 200))
     updateSliderInput(session, "yrange", value = c(0, 1))
     updateCheckboxInput(session, "show_ref", value = FALSE)
     updateCheckboxInput(session, "show_eqn_r2", value = TRUE)
@@ -94,7 +94,7 @@ ureaServer <- function(input, output, session, current_page) {
     
     plot_obj(function() {
       plot(concentrations, od_values, type = "p", col = "blue", pch = 20,
-           xlab = "Urea Concentration (mg/dL)", ylab = "OD Values",
+           xlab = "Urea Concentration (mg/mL)", ylab = "OD Values",
            main = "Urea Calibration Curve",
            xlim = input$xrange, ylim = input$yrange)
       
@@ -159,7 +159,11 @@ ureaServer <- function(input, output, session, current_page) {
     intercept <- coef(model)[1]
     predicted_concentration <- (unknown_od - intercept) / slope
     
-    results_text(sprintf("Estimated Urea Concentration: %.3f mg/dL", predicted_concentration))
+    new_msg <- sprintf("Estimated Urea Concentration: %.3f mg/mL", predicted_concentration)
+    
+    # Combine old + new
+    full_text <- paste(results_text(), new_msg, sep = "\n\n")
+    results_text(full_text)
   })
   
   output$urea_plot <- renderPlot({
